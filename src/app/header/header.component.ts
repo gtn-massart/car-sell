@@ -5,6 +5,14 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+
+
 export class HeaderComponent {
+
+  brand = "Car-Sell";
+
+  getBrand(): string {
+    return this.brand;
+  }
 
 }
