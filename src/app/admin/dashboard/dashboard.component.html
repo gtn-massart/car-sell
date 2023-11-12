@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<h1>Voiture trouvée</h1>
+<div *ngIf="currentCar">
+  <h2>#{{ currentCar.id }} - {{ currentCar.brand }}</h2>
+  <h3>{{currentCar.model}}</h3>
+  <p>{{currentCar.color}}</p>
+</div>

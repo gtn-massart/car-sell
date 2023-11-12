@@ -5,7 +5,12 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path: 'admin/dashboard', component: DashboardComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'admin/dashboard/:id', component: DashboardComponent},
+  {path: 'home', component: HomeComponent},
+
+  // ↓ !!! Toujours mettre ces path en dernier (tous les redirectTo)!!!
+  {path: '', redirectTo: 'home',pathMatch: 'full'},
+  {path: '**', redirectTo: 'home'}, // ** signifie n'importe quel caractère (un ou plusieurs)
 ];
 
 @NgModule({
