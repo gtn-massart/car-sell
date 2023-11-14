@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,15 +43,16 @@ export class DashboardComponent implements OnInit {
 
   initOfferForm(): void {
     this.offerForm = this.formBuider.group({
-      title: "",
-      brand: "",
-      model: "",
-      description: "",
+      title: ["", [Validators.required, Validators.maxLength(100)]],
+      brand: ["", Validators.required],
+      model: ["", Validators.required],
+      description: ["", Validators.required],
       price: 0
     });
   }
 
-  onSubmitOfferForm() : void {
+  onSubmitOfferForm() : void {    console.log(this.offerForm.invalid);
+    
     console.log(this.offerForm.value);   
   }
 
