@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  offerForm! : FormGroup;
   
   cars = [
     {
@@ -29,16 +31,28 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  currentCar : any;
+  currentCar: any;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private formBuider: FormBuilder,
   ){};
 
-  ngOnInit() : void {
-    const carId = this.activatedRoute.snapshot.paramMap.get('id');
-    this.currentCar = this.cars.find(el => el.id === +<string>carId)
-
+  ngOnInit(): void {
+    this.initOfferForm()
   };
+
+  initOfferForm(): void {
+    this.offerForm = this.formBuider.group({
+      title: "",
+      brand: "",
+      model: "",
+      description: "",
+      price: 0
+    });
+  }
+
+  onSubmitOfferForm() : void {
+    console.log(this.offerForm.value);   
+  }
 
 }

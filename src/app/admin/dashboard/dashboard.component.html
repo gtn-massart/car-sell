@@ -1,6 +1,76 @@
-<h1>Voiture trouvée</h1>
-<div *ngIf="currentCar">
-  <h2>#{{ currentCar.id }} - {{ currentCar.brand }}</h2>
-  <h3>{{currentCar.model}}</h3>
-  <p>{{currentCar.color}}</p>
+<!-- Première façon de gérer le formulaire -->
+
+<!-- <div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+      <div class="bg-white shadow rouded p-4">
+        <h1 class="display-6 text-dark">Créer une annonce</h1>
+        <hr class="bg-dark mb-5">
+        <form #offerForm="ngForm" (ngSubmit)="onSubmitOfferForm(offerForm)">
+          <div class="form-group mb-3">
+            <label for="offerTitleInput">Titre</label>
+            <input type="text" id="offerTitleInput" class="form-control" name="title" ngModel>
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerBrandInput">Marque</label>
+            <input type="text" id="offerBrandInput" class="form-control" name="brand" ngModel>
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerModelInput">Modèle</label>
+            <input type="text" id="offerModelInput" class="form-control" name="model" ngModel>
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerDescriptionInput">Marque</label>
+            <textarea id="offerDescriptionInput" class="w-100 form-control" rows="5" name="description" ngModel></textarea>
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerPriceInput">Prix</label>
+            <input type="number" id="offerPriceInput" class="form-control" name="price" ngModel>
+          </div>
+          <div class="d-flex">
+            <button type="submit" class="btn btn-success mx-auto">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+<!-- deuxième façon de gérer le formulaire (best practice) -->
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
+      <div class="bg-white shadow rouded p-4">
+        <h1 class="display-6 text-dark">Créer une annonce</h1>
+        <hr class="bg-dark mb-5">
+        <form [formGroup]="offerForm" (ngSubmit)="onSubmitOfferForm()">
+          <div class="form-group mb-3">
+            <label for="offerTitleInput">Titre</label>
+            <input type="text" id="offerTitleInput" class="form-control" formControlName="title">
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerBrandInput">Marque</label>
+            <input type="text" id="offerBrandInput" class="form-control" formControlName="brand">
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerModelInput">Modèle</label>
+            <input type="text" id="offerModelInput" class="form-control" formControlName="model">
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerDescriptionInput">Description</label>
+            <textarea id="offerDescriptionInput" class="w-100 form-control" rows="5" formControlName="description"></textarea>
+          </div>
+          <div class="form-group mb-3">
+            <label for="offerPriceInput">Prix</label>
+            <input type="number" id="offerPriceInput" class="form-control" formControlName="price">
+          </div>
+          <div class="d-flex">
+            <button type="submit" class="btn btn-success mx-auto">Enregistrer</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
