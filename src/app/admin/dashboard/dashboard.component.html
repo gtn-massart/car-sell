@@ -40,12 +40,14 @@
 <!-- deuxième façon de gérer le formulaire (best practice) -->
 
 <div class="container py-5">
-  <div class="row">
+
+  <div class="row mb-5">
     <div class="col-12 col-md-10 col-lg-8 col-xl-6 mx-auto">
       <div class="bg-white shadow rouded p-4">
         <h1 class="display-6 text-dark">Créer une annonce</h1>
         <hr class="bg-dark mb-5">
         <form [formGroup]="offerForm" (ngSubmit)="onSubmitOfferForm()">
+          <input type="number" formControlName="index" hidden>
           <div class="form-group mb-3">
             <label for="offerTitleInput">Titre</label>
             <input type="text" id="offerTitleInput" class="form-control" formControlName="title">
@@ -73,4 +75,39 @@
       </div>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-12 col-lg-8 mx-auto">
+      <div class="bg-white shadow p-4 rounded">
+        <h1 class="display-6 text-dark">Annonces enregistrées</h1>
+        <hr class="bg-dark mb-5">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Titre</th>
+              <th scope="col">Voiture</th>
+              <th scope="col">Prix</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let offer of offers; let index = index">
+              <th>{{ index + 1 }}</th>
+              <td>{{ offer.title }}</td>
+              <td>{{ offer.brand + ' ' + offer.model }} </td>
+              <td>{{ offer.price }} €</td>
+              <td>
+                <button type="button" class="btn btn-primary" (click)="onEditOffer(offer, index)">Modifier</button>
+                <button type="button" class="btn btn-danger" (click)="onDeleteOffer(index)">Supprimer</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
+
+

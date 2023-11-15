@@ -8,33 +8,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit {
 
-  offerForm! : FormGroup;
-  
-  cars = [
-    {
-      id: 0,
-      brand: 'Renault',
-      model: 'Laguna',
-      color: 'gray'
-    },
-    {
-      id: 1,
-      brand: 'Peugeot',
-      model: '508',
-      color: 'red'
-    },
-    {
-      id: 2,
-      brand: 'Opel',
-      model: 'Corsa',
-      color: 'blue'
-    }
-  ];
+  offerForm! : FormGroup;  
 
-  currentCar: any;
+  offers: any[] = []; 
 
   constructor(
-    private formBuider: FormBuilder,
+    private formBuilder: FormBuilder,
   ){};
 
   ngOnInit(): void {
@@ -42,18 +21,39 @@ export class DashboardComponent implements OnInit {
   };
 
   initOfferForm(): void {
-    this.offerForm = this.formBuider.group({
+    this.offerForm = this.formBuilder.group({
+      index: [0],
       title: ["", [Validators.required, Validators.maxLength(100)]],
-      brand: ["", Validators.required],
-      model: ["", Validators.required],
-      description: ["", Validators.required],
+      brand: "",
+      model: "",
+      description: "",
       price: 0
     });
   }
 
-  onSubmitOfferForm() : void {    console.log(this.offerForm.invalid);
-    
-    console.log(this.offerForm.value);   
+  onSubmitOfferForm() : void {    
+    const offerIndex = this.offerForm.value.index;
+    let offer = this.offerForm.value
+
+     if(offerIndex == null || offerIndex == undefined) {
+    delete offer.index;
+    this.offers.push(offer);
+    }
+    else {
+      delete offer.index;
+      this.offers[offerIndex] = offer;
+    }
+
+    this.offerForm.reset();
+    console.log(this.offers);    
+  }
+
+  onEditOffer(offer: any, index: number): void {
+    this.offerForm.setValue({...offer, index});    
+  }
+
+  onDeleteOffer(index: number): void {
+    this.offers.splice(index, 1)
   }
 
 }
