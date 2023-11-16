@@ -96,7 +96,7 @@
               <th>{{ index + 1 }}</th>
               <td>{{ offer.title }}</td>
               <td>{{ offer.brand + ' ' + offer.model }} </td>
-              <td>{{ offer.price }} €</td>
+              <td>{{ offer.price | currency: 'EUR' : 'symbol' : '4.2-2' : 'fr' }}</td>
               <td>
                 <button type="button" class="btn btn-primary" (click)="onEditOffer(offer, index)">Modifier</button>
                 <button type="button" class="btn btn-danger" (click)="onDeleteOffer(index)">Supprimer</button>
